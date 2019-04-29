@@ -1,0 +1,42 @@
+<div class="container">
+
+  <h1 class="my-4 text-primary">{{productSelected.phoneName}}
+    <small class="text-primary">Full Details</small>
+  </h1>
+
+
+  <div class="row mb-5">
+
+    <div class="col-md-6">
+      <img class="img-thumbnail"  style="width: 240px;height: 400px" src="assets/images/{{productSelected.imageUrl}}" alt="{{productSelected.phoneName}}" >
+      <img class="img-thumbnail ml-5" style="width: 240px;height: 400px" src="assets/images/{{productSelected.imageUrlRear}}" alt="{{productSelected.phoneName}}" >
+
+      <button class="btn btn-warning mt-3"><i class="fa fa-angle-double-left" aria-hidden="true" (click)="continueShopping()"></i> Back to shopping</button>
+      <button class="btn btn-primary mt-3 pull-right" (click)="onAddToCart(productSelected.id)" *ngIf="authenticated()" ><i class="fa fa-cart-plus" aria-hidden="true"></i> Add to cart</button>
+    </div>
+
+    <div class="col-md-5">
+      <h3 class="my-3 text-primary">Description</h3>
+      <p>{{productSelected.phoneDescription}}</p>
+      <hr>
+      <h3 class="my-3 text-primary">Details</h3>
+
+      <div class="list-group">
+        <a href="#" class="list-group-item list-group-item-action"><i class="fa fa-mobile" aria-hidden="true"></i> Brand: {{productSelected.phoneBrand}}</a>
+        <a href="#" class="list-group-item list-group-item-action"><i class="fa fa-info" aria-hidden="true"></i> Model: {{productSelected.phoneName}}</a>
+
+        <a href="#" class="list-group-item list-group-item-action"><i class="fa fa-object-ungroup" aria-hidden="true"></i> Plan: {{productSelected.phoneCategory}}</a>
+        <a href="#" class="list-group-item list-group-item-action"><i class="fa fa-cubes" aria-hidden="true"></i> Stock: {{productSelected.stock}}</a>
+        <a href="#" class="list-group-item list-group-item-action" *ngIf="productSelected.discountedPrice == 0"><i class="fa fa-money" aria-hidden="true"></i> Initial Price: €{{productSelected.phonePrice}}</a>
+        <a href="#" class="list-group-item list-group-item-action strikethrough" *ngIf="productSelected.discountedPrice > 0"><i class="fa fa-money" aria-hidden="true"></i> Initial Price: €{{productSelected.phonePrice}}</a>
+        <a href="#" class="list-group-item list-group-item-action" *ngIf="productSelected.discountedPrice > 0"><i class="fa fa-money" aria-hidden="true"></i> Discounted Price: €{{productSelected.discountedPrice}}</a>
+        <a href="#" class="list-group-item list-group-item-action"><i class="fa fa-line-chart" aria-hidden="true"></i> Rating: <ngb-rating class="pull-right" [(rate)]="productSelected.rating" [max]="5" [readonly]="readonly"></ngb-rating></a>
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+</div>

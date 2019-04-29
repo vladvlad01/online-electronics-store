@@ -1,0 +1,86 @@
+<div class="container">
+  <h3 class="h3 text-center text-primary">Products</h3>
+  <hr>
+
+  <div class="row">
+    <div class="col-md-3 col-sm-3">
+      <h6 class="text-primary text-center">FILTER</h6>
+      <hr>
+
+      <div class="input-group mb-2 mr-sm-2" >
+        <div class="input-group-prepend">
+          <div class="input-group-text">Category</div>
+        </div>
+        <select class="form-control" required name="phoneCategory" [(ngModel)]="categoryFilter" (change)="onCategoryFilter()">
+          <option value="Prepay">Prepay</option>
+          <option value="Bill Pay">Bill Pay</option>
+        </select>
+      </div>
+
+      <div class="input-group mb-4 mr-sm-2" >
+        <div class="input-group-prepend">
+          <div class="input-group-text">Brand</div>
+        </div>
+        <select class="form-control" required name="phoneBrand" [(ngModel)]="brandFilter" (change)="onBrandFilter()">
+          <option disabled value="Select a brand">Select a brand</option>
+          <option *ngFor="let product of productsList;" value="{{product.phoneBrand}}">{{product.phoneBrand}}</option>
+        </select>
+      </div>
+
+      <div class="input-group mb-4 mr-sm-2" >
+        <div class="input-group-prepend">
+          <div class="input-group-text">Rating</div>
+        </div>
+        <select class="form-control" required name="rating" [(ngModel)]="ratingFilter" (change)="onRatingFilter()">
+          <option value="0">0</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+      </div>
+
+      <button class="btn btn-info btn-sm"><i class="fa fa-refresh fa-spin" aria-hidden="true" (click)="onResetFilter()"></i> Reset Filter</button>
+
+    </div>
+
+    <div class="col-md-3 col-sm-9" *ngFor="let product of productsList;">
+
+      <div class="product-grid3">
+        <div class="product-image3">
+          <a (click)="onSelectProduct(product)" style="cursor: pointer">
+            <img class="pic-1" src="assets/images/{{product.imageUrl}}">
+            <img class="pic-2" src="assets/images/{{product.imageUrlRear}}">
+          </a>
+          <ul class="social">
+            <li><a (click)="onSelectProduct(product)"><i class="fa fa-info-circle"></i></a></li>
+            <li><a (click)="onAddOnCart(product.id)" *ngIf="authenticated()"><i class="fa fa-shopping-cart"></i></a></li>
+          </ul>
+          <span class="product-new-label">New</span>
+        </div>
+        <div class="product-content">
+          <span class="text-primary pull-right">{{product.phoneCategory}}</span>
+          <h3 class="title"><a href="#">{{product.phoneName}}</a></h3>
+
+
+          <div class="price" *ngIf="product.discountedPrice > 0">
+            &euro;{{product.discountedPrice}}
+            <span >&euro;{{product.phonePrice}}</span>
+          </div>
+
+          <div class="price" *ngIf="product.discountedPrice == 0">
+            &euro;{{product.phonePrice}}
+          </div>
+
+          <ngb-rating class="pull-right" [(rate)]="product.rating" [max]="5" [readonly]="readonly"></ngb-rating>
+
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+</div>

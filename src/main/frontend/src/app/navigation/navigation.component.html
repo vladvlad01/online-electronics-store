@@ -1,0 +1,72 @@
+<nav class="navbar navbar-dark bg-dark mb-5">
+  <a class="navbar-brand" href="/">SP Online</a>
+  <div class="navbar-expand mr-auto">
+    <div class="navbar-nav">
+      <a
+        class="nav-item nav-link"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        routerLink="/"
+      >Home</a
+      >
+      <a
+        class="nav-item nav-link"
+        routerLink="products"
+        routerLinkActive="active"
+      >Products</a
+      >
+      <a
+        class="nav-item nav-link"
+        routerLink="productsSettings"
+        routerLinkActive="active"
+        *ngIf="authenticated() && appService.checkAuthorities()"
+      >Products Settings</a>
+
+    </div>
+  </div>
+  <div class="navbar-expand ml-auto navbar-nav">
+    <div class="navbar-nav">
+
+      <a class="nav-item nav-link" routerLink="shoppingCart" routerLinkActive="active">
+        <i class="fa fa-shopping-cart fa-2x" aria-hidden="true" *ngIf="authenticated()"><span class="badge badge-info" *ngIf="productService.productsInCart" style="font-size: 12px">{{productService.productsInCart.productList.length}}</span></i>
+      </a>
+
+      <a class="nav-item nav-link" href="#" target="_blank">
+        <i class="fa fa-github"></i>
+      </a>
+
+      <div ngbDropdown>
+      <a class="nav-item nav-link" ngbDropdownToggle *ngIf="authenticated()" id="userDropdown" style="cursor: pointer">
+        <i class="fa fa-user fa-"></i> {{onlineUser()}}
+      </a>
+
+        <ul class="scrollable-menu" ngbDropdownMenu aria-labelledby="userDropdown">
+          <li class="dropdown-item"><a routerLink="/addressSettings">Set Address</a></li>
+          <li class="dropdown-item"><a href="#">Settings</a></li>
+          <li class="dropdown-divider"></li>
+          <li class="dropdown-item"><a href="#">Company Panel</a></li>
+        </ul>
+
+      </div>
+
+      <a class="nav-item nav-link" (click)="logout()"  style="cursor: pointer" *ngIf="authenticated()">
+        <i class="fa fa-sign-out"></i> Log Out
+      </a>
+
+      <a class="nav-item nav-link"  routerLink="login" routerLinkActive="active" *ngIf="!authenticated()">
+        <i class="fa fa-sign-in"></i> Login
+      </a>
+
+      <a class="nav-item nav-link" routerLink="register" *ngIf="!authenticated()">
+        <i class="fa fa-user-plus" aria-hidden="true"></i> Sign In
+      </a>
+
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="alert alert-success"  *ngIf="checkLogout()">
+    You successfully logout!
+  </div>
+</div>

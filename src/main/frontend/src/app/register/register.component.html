@@ -1,0 +1,93 @@
+<div class="container">
+
+  <div class="card bg-light">
+    <article class="card-body mx-auto" style="max-width: 400px;">
+      <h4 class="card-title mt-3 text-center">Create Account</h4>
+      <p class="text-center">Get started with your free account</p>
+
+      <div class="alert alert-success text-center" role="alert" *ngIf="registeredSuccess">
+        <strong>Account successfully registered!</strong>
+      </div>
+
+      <div class="alert alert-success text-danger" role="alert" *ngIf="registeredError">
+        <strong>There has been an error! Please try again.</strong>
+      </div>
+
+      <form [formGroup]="registerForm"  (ngSubmit)="onSubmit()" >
+        <div class="form-group input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+          </div>
+          <input formControlName="username" class="form-control" placeholder="Username" type="text">
+        </div> <!-- form-group// -->
+        <span *ngIf="!registerForm.get('username').valid && registerForm.get('username').touched && !registerForm.get('username').pending" class="help-block text-danger">Please enter a valid username!</span>
+        <span *ngIf="registerForm.get('username').pending && registerForm.get('username').touched" class="help-block text-info"><i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Checking...</span>
+
+        <div class="form-group input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+          </div>
+          <input formControlName="fullName" ngModel class="form-control" placeholder="Full name" type="text" >
+        </div> <!-- form-group// -->
+
+        <div class="form-group input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+          </div>
+          <input formControlName="email" class="form-control" placeholder="Email address" type="email" >
+        </div> <!-- form-group// -->
+        <span *ngIf="!registerForm.get('email').valid && registerForm.get('email').touched && !registerForm.get('email').pending" class="help-block text-danger">Please enter a valid email!</span>
+        <span *ngIf="registerForm.get('email').pending && registerForm.get('email').touched" class="help-block text-info"><i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Checking...</span>
+
+        <div class="form-group input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text"> <i class="fa fa-phone"></i> </span>
+          </div>
+          <select class="custom-select" style="max-width: 120px;" formControlName="phonePrefix">
+            <option value="089">089</option>
+            <option value="085">085</option>
+            <option value="087">087</option>
+          </select>
+          <input formControlName="phoneSuffix" class="form-control" placeholder="Phone number" type="text">
+        </div> <!-- form-group// -->
+
+        <div class="form-group input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+          </div>
+          <input class="form-control" placeholder="Create password" type="password" formControlName="password">
+        </div> <!-- form-group// -->
+        <div class="form-group input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+          </div>
+          <input class="form-control" placeholder="Repeat password" type="password" formControlName="repeatPassword">
+        </div> <!-- form-group// -->
+
+        <div class="form-group input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text"> <i class="fa fa-key"></i> </span>
+          </div>
+          <select class="form-control" formControlName="securityQuestion">
+            <option value="What is your born city?">What is your born city?</option>
+          </select>
+        </div> <!-- form-group end.// -->
+
+        <div class="form-group input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+          </div>
+          <input class="form-control" placeholder="Security Answer" type="password" formControlName="securityAnswer">
+        </div> <!-- form-group// -->
+
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary btn-block" [disabled]="!registerForm.valid"> Create Account  </button>
+        </div> <!-- form-group// -->
+        <p class="text-center">Have an account? <a routerLink="/login">Log In</a> </p>
+      </form>
+    </article>
+  </div> <!-- card.// -->
+
+</div>
+<!--container end.//-->
+

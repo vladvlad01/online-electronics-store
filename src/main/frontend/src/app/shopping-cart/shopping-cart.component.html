@@ -1,0 +1,54 @@
+<div class="container">
+  <div class="alert alert-dark" role="alert" *ngIf="productsToBeBought.length == 0">
+    This cart is empty!
+
+    <a class="btn btn-warning btn-sm" (click)="continueShopping()"><i class="fa fa-angle-left"></i> Continue Shopping</a>
+  </div>
+
+  <table id="cart" class="table table-hover table-condensed" *ngFor="let product of productsToBeBought;let i = index;">
+    <thead>
+    <tr>
+      <th style="width:50%">Product</th>
+      <th style="width:10%">Price</th>
+      <th style="width:8%">Quantity</th>
+      <th style="width:17%" class="text-center">Subtotal</th>
+      <th style="width:15%"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td data-th="Product">
+        <div class="row">
+          <div class="col-sm-2"><img src="assets/images/{{product.imageUrl}}" alt="{{product.phoneName}}" class="img-responsive" width="70" height="100" /></div>
+          <div class="col-sm-8">
+            <h4 class="">{{product.phoneName}}</h4>
+            <p>{{product.phoneDescription}}</p>
+          </div>
+        </div>
+      </td>
+      <td data-th="Price" *ngIf="product.discountedPrice > 0">&euro;{{product.discountedPrice}}</td>
+      <td data-th="Price" *ngIf="product.discountedPrice == 0">&euro;{{product.phonePrice}}</td>
+      <td data-th="Quantity">
+        <input type="number" class="form-control text-center" (change)="onChangeQuantity($event,product)"  value="1" min="1">
+      </td>
+      <td data-th="Subtotal" class="text-center">&euro;{{product.subtotal}}</td>
+      <td class="actions" data-th="">
+        <button class="btn btn-danger btn-sm pull-right" (click)="onDeleteProduct(i)"><i class="fa fa-trash-o"></i></button>
+      </td>
+    </tr>
+    </tbody>
+    <tfoot>
+
+    <tr *ngIf="i == productsToBeBought.length-1">
+      <td><a class="btn btn-warning btn-sm" (click)="continueShopping()"><i class="fa fa-angle-left"></i> Continue Shopping</a></td>
+      <td  colspan="2" class="hidden-xs"><strong>Total &euro;{{total}}</strong></td>
+      <td  class="hidden-xs" style="width: 10%;!important;">
+        <button class="btn btn-info btn-sm ml-2" (click)="updateTotal()"><i class="fa fa-refresh"></i> Update Total</button>
+      </td>
+      <td>
+        <button  [disabled]="!calculateTotal"  class="btn btn-success btn-sm pull-right" >Checkout <i class="fa fa-angle-right"></i></button>
+      </td>
+    </tr>
+    </tfoot>
+  </table>
+</div>

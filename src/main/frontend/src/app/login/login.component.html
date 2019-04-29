@@ -1,0 +1,54 @@
+<div class="loginCont">
+
+<div class="wrapper fadeInDown">
+  <div id="formContent">
+    <!-- Tabs Titles -->
+
+    <!-- Icon -->
+    <div class="fadeIn first">
+      <img src="assets/images/logo.png" class="pb-2" id="icon" alt="User Icon"/>
+    </div>
+
+    <!-- Login Form -->
+    <form (ngSubmit)="onSubmit(loginForm)" #loginForm="ngForm">
+      <div class="container">
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon1" style="width: 40px"><i class="fa fa-user" aria-hidden="true"></i></span>
+        </div>
+        <input type="text" class="form-control fadeIn second" ngModel name="username" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" required>
+      </div>
+
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon2" style="width: 40px"><i class="fa fa-key" aria-hidden="true"></i></span>
+        </div>
+        <input type="password" class="form-control fadeIn third" ngModel name="password" placeholder="Password" aria-label="Password" aria-describedby="basic-addon2" required>
+      </div>
+      </div>
+      <input type="submit" class="fadeIn fourth" value="Log In" [disabled]="!loginForm.valid">
+    </form>
+
+    <!-- Remind Passowrd -->
+    <div id="formFooter">
+
+      <div class="row">
+        <div class="col-sm-4">
+       <a class="underlineHover ml-2" href="#"><i class="fa fa-git-square fa-2x" aria-hidden="true"></i></a>
+      <a class="underlineHover ml-2" href="#"><i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i></a>
+      <a class="underlineHover ml-2" href="#"><i class="fa fa-google-plus-square fa-2x" aria-hidden="true"></i></a>
+        </div>
+
+        <div class="col-sm-4"></div>
+
+        <div class="col-sm-4">
+        <a class="underlineHover ml-2" routerLink="/register" title="Sign Up"><i class="fa fa-user-plus fa-2x" aria-hidden="true"></i></a>
+        <a class="underlineHover ml-2" href="#" title="Forgot Password"><i class="fa fa-unlock-alt fa-2x" aria-hidden="true"></i></a>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
